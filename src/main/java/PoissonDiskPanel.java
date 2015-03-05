@@ -19,6 +19,9 @@ public class PoissonDiskPanel extends JPanel {
         Graphics2D g = (Graphics2D) gz;
 
         drawDot(insertPnt(),g);
+        if(ac.size() == 0) {
+            System.out.println("DONEE!!!");
+        }
         g.dispose();
         // repaint panel with new modified paint
         try{
@@ -45,8 +48,9 @@ public class PoissonDiskPanel extends JPanel {
     }
 
     public void addNode(int a, int b) {
-
-        ac.add(qt.addNode(a, b));
+        QNode p = qt.addNode(a, b);
+        if(p != null)
+        ac.add(p);
     }
 
     public void addNode(double a, double b) {
@@ -55,7 +59,7 @@ public class PoissonDiskPanel extends JPanel {
 
     public QNode insertPnt() {
         if (qt.size() == 0) {
-            qt.addNode((int) Math.random() * WIDTH, (int) Math.random() * HEIGHT);
+            qt.addNode((int) (Math.random() * 1920), (int) (Math.random() * 1000));
             ac.add(qt.root);
         }
         if (ac.size() != 0) {
@@ -71,6 +75,7 @@ public class PoissonDiskPanel extends JPanel {
                 }
                 if (i == ITERATIONS - 1) {
                     // remove from active set
+                    System.out.println("Removing: "  + s.x + "," + s.y);
                     ac.remove(s);
                 }
             }
